@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>우주 이미지 텍스트 추출기 | 무료 온라인 OCR</title>
+    <meta name="description" content="이미지를 업로드하면 브라우저에서 바로 텍스트를 추출하는 무료 온라인 OCR 도구입니다. 서버 업로드 없이 한국어와 영어 이미지 텍스트 인식을 지원합니다.">
+    <meta name="keywords" content="이미지 텍스트 추출, OCR, 사진 글자 인식, 무료 OCR, 한국어 OCR, 온라인 텍스트 추출기">
+    <meta name="author" content="Space OCR">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#080b14">
+    <link rel="canonical" href="/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="우주 이미지 텍스트 추출기">
+    <meta property="og:description" content="이미지 속 글자를 브라우저에서 바로 추출하는 정적 OCR 웹사이트입니다.">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:image" content="assets/img/space-ocr-preview.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="우주 이미지 텍스트 추출기">
+    <meta name="twitter:description" content="서버 업로드 없이 이미지에서 텍스트를 추출하는 무료 OCR 도구입니다.">
+    <link rel="preload" href="assets/css/styles.css" as="style">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "우주 이미지 텍스트 추출기",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "description": "이미지 파일에서 한국어와 영어 텍스트를 추출하는 무료 온라인 OCR 도구입니다.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "KRW"
+        },
+        "featureList": [
+          "브라우저 기반 이미지 텍스트 추출",
+          "한국어 및 영어 OCR 지원",
+          "서버 업로드 없는 로컬 처리",
+          "추출 텍스트 복사 및 초기화"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <canvas class="starfield" id="starfield" aria-hidden="true"></canvas>
+    <div class="page-shell">
+      <header class="site-header" aria-label="사이트 상단">
+        <a class="brand" href="#top" aria-label="우주 이미지 텍스트 추출기 홈">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Space OCR</span>
+        </a>
+        <nav class="site-nav" aria-label="주요 메뉴">
+          <a href="#tool">텍스트 추출</a>
+          <a href="#features">기능소개</a>
+          <a href="#about">사이트 소개</a>
+          <a href="#privacy">개인정보처리방침</a>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="eyebrow">무료 온라인 OCR 도구</p>
+            <h1 id="hero-title">이미지 속 텍스트를 우주처럼 선명하게 추출하세요</h1>
+            <p class="hero-description">
+              Space OCR은 사진, 캡처 이미지, 스캔 파일에 담긴 글자를 브라우저에서 바로 인식해 텍스트로 변환합니다.
+              Cloudflare Pages 같은 정적 호스팅 환경에서 동작하도록 설계되어 별도 서버 없이 사용할 수 있습니다.
+            </p>
+          </div>
+        </section>
+
+        <section class="tool-section" id="tool" aria-labelledby="tool-title">
+          <div class="section-heading">
+            <p class="eyebrow">Image To Text</p>
+            <h2 id="tool-title">이미지 텍스트 추출</h2>
+          </div>
+
+          <div class="workspace" aria-label="이미지 텍스트 추출 작업 영역">
+            <section class="result-panel" aria-labelledby="result-title">
+              <div class="panel-header">
+                <div>
+                  <p class="panel-kicker">추출 결과</p>
+                  <h3 id="result-title">텍스트 출력</h3>
+                </div>
+                <div class="panel-actions">
+                  <button class="icon-button" type="button" id="copyButton" aria-label="추출 텍스트 복사" title="복사">
+                    <span aria-hidden="true">Copy</span>
+                  </button>
+                  <button class="icon-button" type="button" id="clearButton" aria-label="텍스트와 이미지 초기화" title="초기화">
+                    <span aria-hidden="true">Clear</span>
+                  </button>
+                </div>
+              </div>
+              <textarea id="resultText" spellcheck="false" placeholder="오른쪽 칸에 이미지를 업로드한 뒤 추출 버튼을 누르면 이곳에 인식된 텍스트가 표시됩니다." aria-label="추출된 텍스트"></textarea>
+            </section>
+
+            <section class="upload-panel" aria-labelledby="upload-title">
+              <div class="panel-header">
+                <div>
+                  <p class="panel-kicker">이미지 입력</p>
+                  <h3 id="upload-title">파일 업로드</h3>
+                </div>
+                <span class="status-pill" id="statusPill">대기중</span>
+              </div>
+
+              <label class="drop-zone" id="dropZone" for="imageInput">
+                <input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp,image/bmp,image/gif">
+                <span class="drop-icon" aria-hidden="true"></span>
+                <span class="drop-title">이미지를 선택하거나 끌어오세요</span>
+                <span class="drop-help">PNG, JPG, WEBP, BMP, GIF 파일을 지원합니다.</span>
+              </label>
+
+              <figure class="preview-frame" id="previewFrame" hidden>
+                <img id="previewImage" alt="업로드한 이미지 미리보기">
+                <figcaption id="fileName">선택된 이미지</figcaption>
+              </figure>
+
+              <div class="settings-row" aria-label="OCR 설정">
+                <label for="languageSelect">인식 언어</label>
+                <select id="languageSelect">
+                  <option value="kor+eng" selected>한국어 + 영어</option>
+                  <option value="kor">한국어</option>
+                  <option value="eng">영어</option>
+                </select>
+              </div>
+
+              <div class="progress-wrap" aria-live="polite">
+                <div class="progress-label">
+                  <span id="progressText">이미지를 기다리는 중입니다.</span>
+                  <span id="progressPercent">0%</span>
+                </div>
+                <div class="progress-track">
+                  <span class="progress-bar" id="progressBar"></span>
+                </div>
+              </div>
+
+              <button class="extract-button" id="extractButton" type="button">
+                <span class="button-orbit" aria-hidden="true"></span>
+                추출
+              </button>
+            </section>
+          </div>
+        </section>
+
+        <section class="content-grid" id="features" aria-labelledby="features-title">
+          <div class="section-heading">
+            <p class="eyebrow">Features</p>
+            <h2 id="features-title">기능소개</h2>
+          </div>
+          <article>
+            <h3>브라우저 기반 OCR</h3>
+            <p>이미지를 선택하면 사용자의 브라우저에서 텍스트 인식 작업이 실행됩니다. 별도 프로그램 설치 없이 사진 속 문장, 문서 캡처, 스캔 이미지의 글자를 빠르게 확인할 수 있습니다.</p>
+          </article>
+          <article>
+            <h3>한국어와 영어 인식</h3>
+            <p>한국어와 영어가 섞인 이미지도 처리할 수 있도록 언어 선택 옵션을 제공합니다. 문서, 안내문, 메모, 영수증, 화면 캡처 등 다양한 이미지 텍스트 추출 작업에 활용할 수 있습니다.</p>
+          </article>
+          <article>
+            <h3>정적 사이트 친화 구조</h3>
+            <p>HTML, CSS, JavaScript 파일만으로 구성되어 Cloudflare Pages, GitHub Pages, Netlify 같은 정적 호스팅에 배포하기 쉽습니다. 기능 확장을 고려해 화면, OCR 처리, 배경 효과 코드를 분리했습니다.</p>
+          </article>
+        </section>
+
+        <section class="info-section" id="about" aria-labelledby="about-title">
+          <div class="section-heading">
+            <p class="eyebrow">About</p>
+            <h2 id="about-title">사이트 소개</h2>
+          </div>
+          <p>
+            Space OCR은 이미지에서 텍스트를 추출해야 하는 사용자를 위한 무료 웹 도구입니다. 블로그 작성, 문서 정리, 강의 자료 요약, 업무 메모 정리처럼 이미지 속 글자를 다시 입력해야 하는 상황에서 반복 작업을 줄이는 것을 목표로 합니다.
+            우주 테마의 간결한 화면을 바탕으로 왼쪽에는 추출된 텍스트를 넓게 배치하고, 오른쪽에는 이미지 업로드와 추출 버튼을 고정해 작업 흐름을 직관적으로 구성했습니다.
+          </p>
+          <p>
+            이 웹사이트는 향후 PDF 텍스트 추출, 이미지 전처리, 다국어 인식, 텍스트 정리, 다운로드 기능 등을 추가할 수 있도록 유지보수 가능한 정적 파일 구조로 제작되었습니다. 기본 기능은 서버 데이터베이스나 회원 가입 없이 사용할 수 있습니다.
+          </p>
+        </section>
+
+        <section class="info-section" id="privacy" aria-labelledby="privacy-title">
+          <div class="section-heading">
+            <p class="eyebrow">Privacy Policy</p>
+            <h2 id="privacy-title">개인정보처리방침</h2>
+          </div>
+          <p>
+            Space OCR은 이미지 텍스트 추출 기능을 제공하기 위해 사용자가 선택한 이미지 파일을 브라우저에서 처리합니다. 기본 동작에서는 선택한 이미지와 추출된 텍스트를 자체 서버에 저장하거나 별도 데이터베이스로 전송하지 않습니다.
+            사용자가 페이지를 새로고침하거나 초기화하면 브라우저 화면에 표시된 미리보기와 텍스트는 사라집니다.
+          </p>
+          <p>
+            서비스 품질 개선, 보안, 광고 심사 및 통계 분석을 위해 향후 방문 통계 도구나 광고 플랫폼이 추가될 수 있습니다. 이 경우 쿠키, 접속 환경, 이용 기록 등 관련 고지 사항을 본 방침에 반영하고, 필요한 경우 별도 동의 절차를 마련합니다.
+          </p>
+          <p>
+            민감한 개인정보, 주민등록번호, 금융정보, 의료정보, 비밀번호가 포함된 이미지는 업로드하지 않는 것을 권장합니다. 사용자는 본 도구로 추출한 텍스트의 정확성을 직접 확인해야 하며, 중요한 문서에 사용할 때는 원본 이미지와 대조해 검수해야 합니다.
+          </p>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>© 2026 Space OCR. 무료 이미지 텍스트 추출 도구.</p>
+        <a href="#top">맨 위로</a>
+      </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
+    <script src="assets/js/starfield.js" defer></script>
+    <script src="assets/js/ocr.js" defer></script>
+    <script src="assets/js/app.js" defer></script>
+  </body>
+</html>

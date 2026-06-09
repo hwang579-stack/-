@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Space OCR preview</title>
+  <desc id="desc">우주 배경 위에 이미지 텍스트 추출 화면을 표현한 미리보기 이미지</desc>
+  <rect width="1200" height="630" fill="#050711"/>
+  <circle cx="220" cy="150" r="180" fill="#1a4264" opacity="0.45"/>
+  <circle cx="940" cy="96" r="210" fill="#5e2d55" opacity="0.35"/>
+  <g fill="#fff" opacity="0.8">
+    <circle cx="110" cy="86" r="2"/>
+    <circle cx="430" cy="210" r="1.6"/>
+    <circle cx="704" cy="70" r="2.2"/>
+    <circle cx="1060" cy="280" r="1.7"/>
+    <circle cx="868" cy="520" r="2"/>
+    <circle cx="286" cy="496" r="1.5"/>
+  </g>
+  <rect x="110" y="135" width="980" height="360" rx="10" fill="#0d1220" stroke="#5ee6ff" stroke-opacity="0.35"/>
+  <rect x="150" y="185" width="520" height="260" rx="8" fill="#070b15" stroke="#ffffff" stroke-opacity="0.14"/>
+  <rect x="710" y="185" width="330" height="260" rx="8" fill="#12192b" stroke="#ffffff" stroke-opacity="0.14"/>
+  <text x="150" y="102" fill="#8fffc7" font-family="Arial, sans-serif" font-size="26" font-weight="700">Space OCR</text>
+  <text x="178" y="252" fill="#f5f7fb" font-family="Arial, sans-serif" font-size="34" font-weight="700">이미지 텍스트 추출</text>
+  <text x="178" y="306" fill="#b8c2d8" font-family="Arial, sans-serif" font-size="24">브라우저에서 바로 OCR 실행</text>
+  <rect x="760" y="250" width="230" height="110" rx="8" fill="#08101e" stroke="#5ee6ff" stroke-dasharray="8 8"/>
+  <text x="798" y="314" fill="#f5f7fb" font-family="Arial, sans-serif" font-size="22" font-weight="700">Upload Image</text>
+  <rect x="860" y="388" width="130" height="48" rx="8" fill="#8fffc7"/>
+  <text x="902" y="420" fill="#03101a" font-family="Arial, sans-serif" font-size="20" font-weight="700">추출</text>
+</svg>
